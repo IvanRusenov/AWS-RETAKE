@@ -35,7 +35,7 @@ jobs:
           echo "✅ Synth Successful ✅"
 
       - name: Run Tests
-        run:
+        run: |
           npm run test
           echo "✅ All Test Passed ✅"
 
