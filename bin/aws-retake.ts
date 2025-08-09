@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib';
 import { AwsRetakeStack } from '../lib/aws-retake-stack';
 
