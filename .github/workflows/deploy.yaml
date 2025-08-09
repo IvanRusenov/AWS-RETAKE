@@ -32,11 +32,12 @@ jobs:
         run: |
           npm install -g cdk
           cdk synth
-          echo "Synth successful"
+          echo "✅ Synth Successful ✅"
 
       - name: Run Tests
         run:
           npm run test
+          echo "✅ All Test Passed ✅"
 
       - name: Deploy CDK Stack
         run: |
