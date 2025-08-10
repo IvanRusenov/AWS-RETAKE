@@ -3,6 +3,32 @@
 exports[`Snapshot test 1`] = `
 {
   "Outputs": {
+    "ApiGatewayUrl": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "https://",
+            {
+              "Ref": "CatLoversApi6BBA0DE2",
+            },
+            ".execute-api.",
+            {
+              "Ref": "AWS::Region",
+            },
+            ".",
+            {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            {
+              "Ref": "CatLoversApiDeploymentStageprod1FD8E93B",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
     "CatLoversApiEndpoint33B53142": {
       "Value": {
         "Fn::Join": [
@@ -26,6 +52,14 @@ exports[`Snapshot test 1`] = `
             },
             "/",
           ],
+        ],
+      },
+    },
+    "websiteUrl": {
+      "Value": {
+        "Fn::GetAtt": [
+          "CatLoversWebsiteBucketE8A5384A",
+          "WebsiteURL",
         ],
       },
     },

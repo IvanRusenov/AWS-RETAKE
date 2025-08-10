@@ -8,6 +8,7 @@ import {Runtime} from "aws-cdk-lib/aws-lambda";
 import * as path from "node:path";
 import {Cors, LambdaIntegration, RestApi} from "aws-cdk-lib/aws-apigateway";
 import {BucketDeployment, Source} from "aws-cdk-lib/aws-s3-deployment";
+import {CfnOutput} from "aws-cdk-lib";
 
 export class AwsRetakeStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -73,6 +74,17 @@ export class AwsRetakeStack extends cdk.Stack {
 
         api.root.addResource("saveCat")
             .addMethod("POST", new LambdaIntegration(saveCatLambda, {proxy: true}));
+
+
+        new CfnOutput(this, "websiteUrl", {
+            key: "websiteUrl",
+            value: websiteBucket.bucketWebsiteUrl
+        });
+
+        new CfnOutput(this, "ApiGatewayUrl", {
+            key: "ApiGatewayUrl",
+            value: api.url
+        });
 
     }
 }
