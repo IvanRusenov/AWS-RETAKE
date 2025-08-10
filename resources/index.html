@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lydia's Cat Lovers</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        #catImg { max-width: 500px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        #saveCat {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        #saveCat:hover { background-color: #45a049; }
+        .message { margin-top: 20px; color: green; }
+    </style>
+</head>
+<body>
+<h1>Random Cat Pictures</h1>
+<p>Click the button below to save your favorite cat!</p>
+
+<img id="catImg" src="" alt="Random cat"/>
+
+<br>
+<button id="saveCat">Save this cat as favorite</button>
+<div id="message" class="message"></div>
+
+<script>
+    let savedUrl = '';
+    let catId = '';
+    const apiUrl = 'YOUR_API_GATEWAY_URL'; // Will be replaced during deployment
+
+    const fetchCat = async () => {
+        try {
+            document.getElementById('message').textContent = 'Loading new cat...';
+            const res = await fetch("https://cataas.com/cat?json=true");
+            const data = await res.json();
+
+            catId = data.id;
+            savedUrl = `https://cataas.com/cat/${data.id}`;
+
+            document.getElementById("catImg").src = savedUrl;
+            document.getElementById('message').textContent = '';
+        } catch (error) {
+            document.getElementById('message').textContent = 'Error loading cat. Please try again.';
+            console.error('Error loading cat:', error);
+        }
+    };
+
+    fetchCat();
+
+    document.getElementById("saveCat").onclick = async () => {
+        try {
+            document.getElementById('message').textContent = 'Saving cat...';
+            const result = await fetch(`${apiUrl}/saveCat`, {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ catId, savedUrl })
+            });
+
+            const data = await result.json();
+            document.getElementById('message').textContent = 'Cat saved as favorite! Lydia has been notified.';
+
+            // Load a new cat after saving
+            setTimeout(fetchCat, 2000);
+        } catch (error) {
+            document.getElementById('message').textContent = 'Error saving cat. Please try again.';
+            console.error('Error saving cat:', error);
+        }
+    };
+</script>
+</body>
+</html>
