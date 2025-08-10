@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1754816047937" clover="3.2.0">
-  <project timestamp="1754816047938" name="All files">
-    <metrics statements="25" coveredstatements="25" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1" elements="26" coveredelements="26" complexity="0" loc="25" ncloc="25" packages="1" files="1" classes="1"/>
+<coverage generated="1754820206564" clover="3.2.0">
+  <project timestamp="1754820206565" name="All files">
+    <metrics statements="29" coveredstatements="29" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1" elements="30" coveredelements="30" complexity="0" loc="29" ncloc="29" packages="1" files="1" classes="1"/>
     <file name="aws-retake-stack.ts" path="C:\Users\i_rus\Desktop\AWS-RETAKE\lib\aws-retake-stack.ts">
-      <metrics statements="25" coveredstatements="25" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <metrics statements="29" coveredstatements="29" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <line num="1" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
       <line num="4" count="1" type="stmt"/>
@@ -27,8 +27,12 @@
       <line num="77" count="1" type="stmt"/>
       <line num="80" count="1" type="stmt"/>
       <line num="104" count="1" type="stmt"/>
+      <line num="107" count="1" type="stmt"/>
       <line num="108" count="1" type="stmt"/>
-      <line num="113" count="1" type="stmt"/>
+      <line num="109" count="1" type="stmt"/>
+      <line num="110" count="1" type="stmt"/>
+      <line num="112" count="1" type="stmt"/>
+      <line num="117" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>

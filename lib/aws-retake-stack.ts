@@ -8,7 +8,7 @@ import {Runtime} from "aws-cdk-lib/aws-lambda";
 import * as path from "node:path";
 import {Cors, LambdaIntegration, RestApi} from "aws-cdk-lib/aws-apigateway";
 import {BucketDeployment, Source} from "aws-cdk-lib/aws-s3-deployment";
-import {aws_iam, CfnOutput} from "aws-cdk-lib";
+import {aws_iam, CfnOutput, Tags} from "aws-cdk-lib";
 
 export class AwsRetakeStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -54,7 +54,7 @@ export class AwsRetakeStack extends cdk.Stack {
         // SNS Topic for notifications
         const topic = new Topic(this, 'NewFavoriteCatTopic');
 
-        new Subscription(this, "subscription", {
+        const subscription = new Subscription(this, "subscription", {
             topic: topic,
             protocol: SubscriptionProtocol.EMAIL,
             endpoint: "i_rusenov@abv.bg"
@@ -104,6 +104,10 @@ export class AwsRetakeStack extends cdk.Stack {
         api.root.addResource("saveCat")
             .addMethod("POST", new LambdaIntegration(saveCatLambda, {proxy: true}));
 
+        Tags.of(websiteBucket).add("Administrator", "Ivan");
+        Tags.of(topic).add("Administrator", "Ivan");
+        Tags.of(subscription).add("Administrator", "Ivan")
+        Tags.of(bucketDeployment).add("Administrator", "Ivan")
 
         new CfnOutput(this, "websiteUrl", {
             key: "websiteUrl",

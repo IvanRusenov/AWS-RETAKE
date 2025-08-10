@@ -407,6 +407,10 @@ exports[`Snapshot test 1`] = `
         },
         "Tags": [
           {
+            "Key": "Administrator",
+            "Value": "Ivan",
+          },
+          {
             "Key": "aws-cdk:cr-owned:b9b90c61",
             "Value": "true",
           },
@@ -640,6 +644,14 @@ exports[`Snapshot test 1`] = `
       "UpdateReplacePolicy": "Retain",
     },
     "NewFavoriteCatTopicC6940A17": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Administrator",
+            "Value": "Ivan",
+          },
+        ],
+      },
       "Type": "AWS::SNS::Topic",
     },
     "adminRoleC345D70B": {
