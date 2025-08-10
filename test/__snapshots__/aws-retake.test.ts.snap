@@ -642,78 +642,7 @@ exports[`Snapshot test 1`] = `
     "NewFavoriteCatTopicC6940A17": {
       "Type": "AWS::SNS::Topic",
     },
-    "indexDeploymentAwsCliLayer7772B932": {
-      "Properties": {
-        "Content": {
-          "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
-          },
-          "S3Key": "1b2c92f2cd21c170884393633bd4c732676df6290562199b6e3ca5e2a1be7d18.zip",
-        },
-        "Description": "/opt/awscli/aws",
-      },
-      "Type": "AWS::Lambda::LayerVersion",
-    },
-    "indexDeploymentCustomResource5A9A1D16": {
-      "DeletionPolicy": "Delete",
-      "Properties": {
-        "DestinationBucketName": {
-          "Ref": "CatLoversWebsiteBucketE8A5384A",
-        },
-        "OutputObjectKeys": true,
-        "Prune": true,
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536",
-            "Arn",
-          ],
-        },
-        "SourceBucketNames": [
-          {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
-          },
-        ],
-        "SourceObjectKeys": [
-          "fcc31f6294517cb72cbd6f700878760194fff5282180da32c56b2d785b8d2271.zip",
-        ],
-      },
-      "Type": "Custom::CDKBucketDeployment",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "saveCatLambda1F4F7FEF": {
-      "DependsOn": [
-        "saveCatLambdaServiceRoleDefaultPolicy33EA7725",
-        "saveCatLambdaServiceRole87C866A8",
-      ],
-      "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
-          },
-          "S3Key": "8bfdcc3ecf9968437e5bc45409c41b7d8a3cade638cc0a60875c0e84ada79a14.zip",
-        },
-        "Environment": {
-          "Variables": {
-            "TABLE_NAME": {
-              "Ref": "FavoriteCatsTable64C4E88A",
-            },
-            "TOPIC_ARN": {
-              "Ref": "NewFavoriteCatTopicC6940A17",
-            },
-          },
-        },
-        "Handler": "index.handler",
-        "Role": {
-          "Fn::GetAtt": [
-            "saveCatLambdaServiceRole87C866A8",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs20.x",
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "saveCatLambdaServiceRole87C866A8": {
+    "adminRoleC345D70B": {
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
@@ -722,6 +651,13 @@ exports[`Snapshot test 1`] = `
               "Effect": "Allow",
               "Principal": {
                 "Service": "lambda.amazonaws.com",
+              },
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "apigateway.amazonaws.com",
               },
             },
           ],
@@ -736,7 +672,7 @@ exports[`Snapshot test 1`] = `
                 {
                   "Ref": "AWS::Partition",
                 },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+                ":iam::aws:policy/AdministratorAccess",
               ],
             ],
           },
@@ -744,7 +680,7 @@ exports[`Snapshot test 1`] = `
       },
       "Type": "AWS::IAM::Role",
     },
-    "saveCatLambdaServiceRoleDefaultPolicy33EA7725": {
+    "adminRoleDefaultPolicy4FE403EF": {
       "Properties": {
         "PolicyDocument": {
           "Statement": [
@@ -786,14 +722,85 @@ exports[`Snapshot test 1`] = `
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "saveCatLambdaServiceRoleDefaultPolicy33EA7725",
+        "PolicyName": "adminRoleDefaultPolicy4FE403EF",
         "Roles": [
           {
-            "Ref": "saveCatLambdaServiceRole87C866A8",
+            "Ref": "adminRoleC345D70B",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+    "indexDeploymentAwsCliLayer7772B932": {
+      "Properties": {
+        "Content": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "1b2c92f2cd21c170884393633bd4c732676df6290562199b6e3ca5e2a1be7d18.zip",
+        },
+        "Description": "/opt/awscli/aws",
+      },
+      "Type": "AWS::Lambda::LayerVersion",
+    },
+    "indexDeploymentCustomResource5A9A1D16": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "DestinationBucketName": {
+          "Ref": "CatLoversWebsiteBucketE8A5384A",
+        },
+        "OutputObjectKeys": true,
+        "Prune": true,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536",
+            "Arn",
+          ],
+        },
+        "SourceBucketNames": [
+          {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+        ],
+        "SourceObjectKeys": [
+          "fcc31f6294517cb72cbd6f700878760194fff5282180da32c56b2d785b8d2271.zip",
+        ],
+      },
+      "Type": "Custom::CDKBucketDeployment",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "saveCatLambda1F4F7FEF": {
+      "DependsOn": [
+        "adminRoleDefaultPolicy4FE403EF",
+        "adminRoleC345D70B",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "8bfdcc3ecf9968437e5bc45409c41b7d8a3cade638cc0a60875c0e84ada79a14.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "TABLE_NAME": {
+              "Ref": "FavoriteCatsTable64C4E88A",
+            },
+            "TOPIC_ARN": {
+              "Ref": "NewFavoriteCatTopicC6940A17",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "adminRoleC345D70B",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs20.x",
+      },
+      "Type": "AWS::Lambda::Function",
     },
     "subscriptionD5B264BF": {
       "Properties": {

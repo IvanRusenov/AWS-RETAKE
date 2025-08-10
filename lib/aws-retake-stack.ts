@@ -14,6 +14,18 @@ export class AwsRetakeStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
 
+
+
+        const adminRole = new aws_iam.Role(this, 'adminRole', {
+            assumedBy: new aws_iam.CompositePrincipal(
+                new aws_iam.ServicePrincipal('lambda.amazonaws.com'),
+                new aws_iam.ServicePrincipal('apigateway.amazonaws.com'),
+            ),
+            managedPolicies: [
+                aws_iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')
+            ]
+        });
+
 // S3 Bucket for website
         const websiteBucket = new Bucket(this, 'CatLoversWebsiteBucket', {
             websiteIndexDocument: 'index.html',
@@ -53,6 +65,7 @@ export class AwsRetakeStack extends cdk.Stack {
             handler: "handler",
             runtime: Runtime.NODEJS_20_X,
             entry: path.join(__dirname, "../src/saveCatLambda.ts"),
+            role: adminRole,
             environment: {
                 TABLE_NAME: table.tableName,
                 TOPIC_ARN: topic.topicArn,
