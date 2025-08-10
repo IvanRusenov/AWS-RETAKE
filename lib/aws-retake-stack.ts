@@ -8,7 +8,7 @@ import {Runtime} from "aws-cdk-lib/aws-lambda";
 import * as path from "node:path";
 import {Cors, LambdaIntegration, RestApi} from "aws-cdk-lib/aws-apigateway";
 import {BucketDeployment, Source} from "aws-cdk-lib/aws-s3-deployment";
-import {CfnOutput} from "aws-cdk-lib";
+import {aws_iam, CfnOutput} from "aws-cdk-lib";
 
 export class AwsRetakeStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -70,7 +70,22 @@ export class AwsRetakeStack extends cdk.Stack {
                 allowMethods: Cors.ALL_METHODS,
                 allowHeaders: ['Content-Type'],
                 statusCode: 200
-            }
+            },
+            policy: new aws_iam.PolicyDocument({
+                statements: [
+                    new aws_iam.PolicyStatement({
+                        actions: ['execute-api:Invoke'],
+                        resources: ['execute-api:/*/*/*'],
+                        principals: [new aws_iam.AnyPrincipal()],
+                        effect: aws_iam.Effect.ALLOW,
+                        conditions: {
+                            'IpAddress': {
+                                'aws:SourceIp': ['0.0.0.0/0']
+                            }
+                        }
+                    })
+                ]
+            })
         });
 
         api.root.addResource("saveCat")

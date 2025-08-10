@@ -75,6 +75,26 @@ exports[`Snapshot test 1`] = `
     "CatLoversApi6BBA0DE2": {
       "Properties": {
         "Name": "CatLoversApi",
+        "Policy": {
+          "Statement": [
+            {
+              "Action": "execute-api:Invoke",
+              "Condition": {
+                "IpAddress": {
+                  "aws:SourceIp": [
+                    "0.0.0.0/0",
+                  ],
+                },
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": "execute-api:/*/*/*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
       },
       "Type": "AWS::ApiGateway::RestApi",
     },
@@ -127,7 +147,7 @@ exports[`Snapshot test 1`] = `
       "Type": "AWS::IAM::Role",
       "UpdateReplacePolicy": "Retain",
     },
-    "CatLoversApiDeployment352B2FD756524d7609aeabe95e0e0f51ded63c73": {
+    "CatLoversApiDeployment352B2FD741d533f0a5385c617243e8e8137f3458": {
       "DependsOn": [
         "CatLoversApiOPTIONS60AD6AF2",
         "CatLoversApisaveCatOPTIONSF2F3DAC2",
@@ -151,7 +171,7 @@ exports[`Snapshot test 1`] = `
       ],
       "Properties": {
         "DeploymentId": {
-          "Ref": "CatLoversApiDeployment352B2FD756524d7609aeabe95e0e0f51ded63c73",
+          "Ref": "CatLoversApiDeployment352B2FD741d533f0a5385c617243e8e8137f3458",
         },
         "RestApiId": {
           "Ref": "CatLoversApi6BBA0DE2",
