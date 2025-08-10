@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1754813140504" clover="3.2.0">
-  <project timestamp="1754813140504" name="All files">
+<coverage generated="1754814348633" clover="3.2.0">
+  <project timestamp="1754814348633" name="All files">
     <metrics statements="24" coveredstatements="24" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1" elements="25" coveredelements="25" complexity="0" loc="24" ncloc="24" packages="1" files="1" classes="1"/>
     <file name="aws-retake-stack.ts" path="C:\Users\i_rus\Desktop\AWS-RETAKE\lib\aws-retake-stack.ts">
       <metrics statements="24" coveredstatements="24" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -25,9 +25,9 @@
       <line num="63" count="1" type="stmt"/>
       <line num="64" count="1" type="stmt"/>
       <line num="67" count="1" type="stmt"/>
-      <line num="75" count="1" type="stmt"/>
-      <line num="79" count="1" type="stmt"/>
-      <line num="84" count="1" type="stmt"/>
+      <line num="76" count="1" type="stmt"/>
+      <line num="80" count="1" type="stmt"/>
+      <line num="85" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>

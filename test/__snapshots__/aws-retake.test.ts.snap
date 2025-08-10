@@ -127,7 +127,7 @@ exports[`Snapshot test 1`] = `
       "Type": "AWS::IAM::Role",
       "UpdateReplacePolicy": "Retain",
     },
-    "CatLoversApiDeployment352B2FD79eeb497c53834bd8d58e12d33c16ca93": {
+    "CatLoversApiDeployment352B2FD756524d7609aeabe95e0e0f51ded63c73": {
       "DependsOn": [
         "CatLoversApiOPTIONS60AD6AF2",
         "CatLoversApisaveCatOPTIONSF2F3DAC2",
@@ -151,7 +151,7 @@ exports[`Snapshot test 1`] = `
       ],
       "Properties": {
         "DeploymentId": {
-          "Ref": "CatLoversApiDeployment352B2FD79eeb497c53834bd8d58e12d33c16ca93",
+          "Ref": "CatLoversApiDeployment352B2FD756524d7609aeabe95e0e0f51ded63c73",
         },
         "RestApiId": {
           "Ref": "CatLoversApi6BBA0DE2",
@@ -173,7 +173,7 @@ exports[`Snapshot test 1`] = `
                 "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
                 "method.response.header.Access-Control-Allow-Origin": "'*'",
               },
-              "StatusCode": "204",
+              "StatusCode": "200",
             },
           ],
           "RequestTemplates": {
@@ -188,7 +188,7 @@ exports[`Snapshot test 1`] = `
               "method.response.header.Access-Control-Allow-Methods": true,
               "method.response.header.Access-Control-Allow-Origin": true,
             },
-            "StatusCode": "204",
+            "StatusCode": "200",
           },
         ],
         "ResourceId": {
@@ -231,7 +231,7 @@ exports[`Snapshot test 1`] = `
                 "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
                 "method.response.header.Access-Control-Allow-Origin": "'*'",
               },
-              "StatusCode": "204",
+              "StatusCode": "200",
             },
           ],
           "RequestTemplates": {
@@ -246,7 +246,7 @@ exports[`Snapshot test 1`] = `
               "method.response.header.Access-Control-Allow-Methods": true,
               "method.response.header.Access-Control-Allow-Origin": true,
             },
-            "StatusCode": "204",
+            "StatusCode": "200",
           },
         ],
         "ResourceId": {
@@ -654,7 +654,7 @@ exports[`Snapshot test 1`] = `
           },
         ],
         "SourceObjectKeys": [
-          "b566a9afc43eeafc5954fe9b17bc2a4cfc9db21c5dfd4be853ec3c6be32312c1.zip",
+          "fcc31f6294517cb72cbd6f700878760194fff5282180da32c56b2d785b8d2271.zip",
         ],
       },
       "Type": "Custom::CDKBucketDeployment",
